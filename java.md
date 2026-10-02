@@ -32,6 +32,40 @@
 
 ---
 
+# ☕ Core Java Interview Questions & Answers — Part 2
+
+<p align="center">
+  <strong>💻 Java Fundamentals & Object-Oriented Programming</strong><br>
+  <em>Simple answers • Code examples • Interview revision</em>
+</p>
+
+---
+
+## 📚 Table of Contents
+
+1. [Difference Between final, finally, and finalize()](#1-difference-between-final-finally-and-finalize)
+2. [What are Access Modifiers?](#2-what-are-access-modifiers)
+3. [Difference Between public, private, and protected](#3-difference-between-public-private-and-protected)
+4. [What is Type Casting?](#4-what-is-type-casting)
+5. [Implicit vs Explicit Casting](#5-implicit-vs-explicit-casting)
+6. [What are Keywords in Java?](#6-what-are-keywords-in-java)
+7. [What are Comments in Java?](#7-what-are-comments-in-java)
+8. [What is a Package?](#8-what-is-a-package)
+9. [What is the Use of import?](#9-what-is-the-use-of-import)
+10. [What are Naming Conventions?](#10-what-are-naming-conventions-in-java)
+11. [What is OOP?](#11-what-is-oop)
+12. [What are the Four Pillars of OOP?](#12-what-are-the-four-pillars-of-oop)
+13. [What is Encapsulation?](#13-what-is-encapsulation)
+14. [What is Inheritance?](#14-what-is-inheritance)
+15. [What is Polymorphism?](#15-what-is-polymorphism)
+16. [What is Abstraction?](#16-what-is-abstraction)
+17. [What is an Abstract Class?](#17-what-is-an-abstract-class)
+18. [What is an Interface?](#18-what-is-an-interface)
+19. [Abstract Class vs Interface](#19-abstract-class-vs-interface)
+
+---
+
+
 ## 1. What is Java?
 
 **Answer:** Java is a high-level, class-based, object-oriented programming language used to develop web applications, desktop applications, enterprise software, and Android applications.
@@ -550,6 +584,689 @@ final class Vehicle {
 | `final`           | Restricts reassignment, overriding, or inheritance, depending on use |
 
 ---
+
+
+# ☕ Core Java Interview Questions & Answers — Part 2
+
+<p align="center">
+  <strong>💻 Java Fundamentals & Object-Oriented Programming</strong><br>
+  <em>Simple answers • Code examples • Interview revision</em>
+</p>
+
+---
+
+ 
+
+## 1. Difference Between `final`, `finally`, and `finalize()`
+
+**Answer:** These three terms are different Java concepts.
+
+| Term         | Meaning           | Purpose                                                                                                  |
+| ------------ | ----------------- | -------------------------------------------------------------------------------------------------------- |
+| `final`      | Keyword           | Restricts reassignment, overriding, or inheritance                                                       |
+| `finally`    | Block             | Executes during normal or exceptional completion of a `try` statement, subject to abrupt JVM termination |
+| `finalize()` | Deprecated method | Historically associated with object cleanup before garbage collection                                    |
+
+### Example: `final`
+
+```java
+final int age = 21;
+// age = 25; // Compilation error
+```
+
+### Example: `finally`
+
+```java
+try {
+    System.out.println("Inside try");
+} finally {
+    System.out.println("Finally block");
+}
+```
+
+### Example: `finalize()`
+
+Historically, `finalize()` could be invoked by the garbage collector before reclaiming an object. However, **finalization is deprecated for removal** and is unreliable for resource management. Do not use it for new code.
+
+Use `try-with-resources` for resources such as files and database connections.
+
+---
+
+## 2. What are Access Modifiers?
+
+**Answer:** Access modifiers control where classes, methods, constructors, and fields can be accessed from.
+
+Java has four access levels:
+
+* `public`
+* `protected`
+* Default (package-private; no keyword)
+* `private`
+
+**Example:**
+
+```java
+public class Student {
+    private int age;
+    public String name;
+    protected int marks;
+    String college;
+}
+```
+
+---
+
+## 3. Difference Between `public`, `private`, and `protected`
+
+| Modifier    | Same Class | Same Package | Subclass in Another Package  | Other Packages    |
+| ----------- | ---------- | ------------ | ---------------------------- | ----------------- |
+| `public`    | Yes        | Yes          | Yes                          | Yes               |
+| `protected` | Yes        | Yes          | Yes, subject to access rules | No general access |
+| Default     | Yes        | Yes          | No                           | No                |
+| `private`   | Yes        | No           | No                           | No                |
+
+**Remember:**
+
+* `public` — accessible wherever the declaring type and its members are accessible.
+* `private` — accessible only within the declaring top-level class or enclosing class's applicable scope.
+* `protected` — accessible within the same package and through inheritance, subject to Java's cross-package access rules.
+* Default — accessible within the same package.
+
+**Important:** A top-level class can normally be declared `public` or package-private, not `private` or `protected`.
+
+---
+
+## 4. What is Type Casting?
+
+**Answer:** Type casting is the process of converting a value from one data type to another.
+
+Java supports conversions such as:
+
+* `int` to `double`
+* `double` to `int`
+* `char` to `int`
+
+**Example:**
+
+```java
+int number = 100;
+double result = number;
+```
+
+Here, the integer value is converted into a `double`.
+
+---
+
+## 5. Implicit vs Explicit Casting
+
+### A. Implicit Casting (Widening)
+
+Java automatically converts a value to a compatible wider primitive type.
+
+```java
+int number = 100;
+double result = number;
+
+System.out.println(result);
+```
+
+**Output:**
+
+```text
+100.0
+```
+
+### B. Explicit Casting (Narrowing)
+
+The programmer specifies the target type using a cast. Information may be lost.
+
+```java
+double price = 99.99;
+int result = (int) price;
+
+System.out.println(result);
+```
+
+**Output:**
+
+```text
+99
+```
+
+| Feature       | Implicit Casting                                       | Explicit Casting                   |
+| ------------- | ------------------------------------------------------ | ---------------------------------- |
+| Also called   | Widening conversion                                    | Narrowing conversion               |
+| Conversion    | Usually to a wider compatible primitive type           | Often to a narrower primitive type |
+| Cast required | No                                                     | Yes                                |
+| Data loss     | Possible in some conversions, such as `int` to `float` | Possible                           |
+| Example       | `int` → `double`                                       | `double` → `int`                   |
+
+---
+
+## 6. What are Keywords in Java?
+
+**Answer:** Keywords are reserved words that have predefined meanings in Java. They cannot be used as ordinary identifiers.
+
+**Examples:**
+
+```java
+class Student {
+    public static void main(String[] args) {
+        int age = 21;
+        if (age >= 18) {
+            System.out.println("Adult");
+        }
+    }
+}
+```
+
+Keywords in this example include `class`, `public`, `static`, `void`, `int`, and `if`.
+
+Other examples include `return`, `new`, `this`, `extends`, `implements`, `try`, and `final`.
+
+**Note:** `true`, `false`, and `null` are literals, not keywords in the Java Language Specification's technical classification.
+
+---
+
+## 7. What are Comments in Java?
+
+**Answer:** Comments are explanatory text in source code that the compiler does not treat as executable Java statements.
+
+Java has three commonly used comment forms.
+
+### A. Single-Line Comment
+
+```java
+// This is a single-line comment
+int age = 21;
+```
+
+### B. Multi-Line Comment
+
+```java
+/*
+ This is a multi-line comment.
+ It can span multiple lines.
+*/
+```
+
+### C. Documentation Comment
+
+```java
+/**
+ * Displays a welcome message.
+ */
+void display() {
+    System.out.println("Welcome");
+}
+```
+
+Documentation comments can be processed by the `javadoc` tool to generate API documentation.
+
+---
+
+## 8. What is a Package?
+
+**Answer:** A package groups related Java types, such as classes, interfaces, and enums, under a common namespace.
+
+**Benefits:**
+
+* Organizes code.
+* Helps avoid naming conflicts.
+* Supports package-level access control.
+* Makes large projects easier to maintain.
+
+**Example:**
+
+```java
+package com.example.student;
+
+public class Student {
+    public void display() {
+        System.out.println("Student details");
+    }
+}
+```
+
+Here, `com.example.student` is the package name.
+
+---
+
+## 9. What is the Use of `import`?
+
+**Answer:** The `import` statement allows a Java source file to refer to accessible types from another package by their simple names instead of repeatedly writing their fully qualified names.
+
+**Without import:**
+
+```java
+java.util.Scanner sc =
+    new java.util.Scanner(System.in);
+```
+
+**With import:**
+
+```java
+import java.util.Scanner;
+
+class Demo {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println(sc.nextLine());
+        sc.close();
+    }
+}
+```
+
+**Remember:** `import` does not copy a class into your program or automatically import subpackages.
+
+---
+
+## 10. What are Naming Conventions in Java?
+
+**Answer:** Naming conventions are commonly followed guidelines for choosing readable and consistent names for Java program elements.
+
+| Element                | Convention               | Example               |
+| ---------------------- | ------------------------ | --------------------- |
+| Class                  | PascalCase               | `StudentDetails`      |
+| Interface              | PascalCase               | `Runnable`            |
+| Method                 | lowerCamelCase           | `calculateTotal()`    |
+| Variable               | lowerCamelCase           | `studentName`         |
+| Constant               | UPPER_SNAKE_CASE         | `MAX_VALUE`           |
+| Package                | Lowercase                | `com.example.student` |
+| Generic type parameter | Usually a capital letter | `T`, `E`, `K`, `V`    |
+
+**Example:**
+
+```java
+class StudentDetails {
+    static final int MAX_MARKS = 100;
+
+    String studentName;
+
+    void displayDetails() {
+        System.out.println(studentName);
+    }
+}
+```
+
+These conventions improve readability but are not all mandatory compiler rules.
+
+---
+
+## 11. What is OOP?
+
+**Answer:** OOP stands for **Object-Oriented Programming**. It is a programming approach that organizes software around objects containing data and behavior.
+
+Java supports object-oriented programming through classes, objects, inheritance, polymorphism, encapsulation, and abstraction.
+
+**Example:**
+
+```java
+class Car {
+    String color;
+
+    void drive() {
+        System.out.println("Car is moving");
+    }
+}
+```
+
+Here, `Car` defines data (`color`) and behavior (`drive()`).
+
+---
+
+## 12. What are the Four Pillars of OOP?
+
+The four commonly taught pillars of object-oriented programming are:
+
+| Pillar        | Meaning                                                         |
+| ------------- | --------------------------------------------------------------- |
+| Encapsulation | Bundling data and methods together while controlling access     |
+| Inheritance   | Creating a class based on another class                         |
+| Polymorphism  | One interface or method call can have different implementations |
+| Abstraction   | Hiding implementation details and exposing essential behavior   |
+
+```text
+          OOP
+           |
+   ┌───────┼────────┐
+   |       |        |
+Encapsulation     Inheritance
+   |
+Polymorphism
+   |
+Abstraction
+```
+
+---
+
+## 13. What is Encapsulation?
+
+**Answer:** Encapsulation is the practice of bundling data and related methods into a class while restricting direct access to internal state.
+
+A common implementation uses `private` fields and public methods to control access.
+
+**Example:**
+
+```java
+class Student {
+    private int age;
+
+    public void setAge(int age) {
+        if (age > 0) {
+            this.age = age;
+        }
+    }
+
+    public int getAge() {
+        return age;
+    }
+}
+```
+
+**Usage:**
+
+```java
+Student s = new Student();
+s.setAge(21);
+
+System.out.println(s.getAge());
+```
+
+**Output:**
+
+```text
+21
+```
+
+**Benefit:** The class controls how its internal data is accessed and updated.
+
+---
+
+## 14. What is Inheritance?
+
+**Answer:** Inheritance allows a class to inherit accessible members from another class. It supports code reuse and method overriding.
+
+**Example:**
+
+```java
+class Animal {
+    void eat() {
+        System.out.println("Animal eats");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("Dog barks");
+    }
+}
+```
+
+**Usage:**
+
+```java
+Dog d = new Dog();
+d.eat();
+d.bark();
+```
+
+**Output:**
+
+```text
+Animal eats
+Dog barks
+```
+
+Here, `Dog` is the subclass and `Animal` is the superclass.
+
+---
+
+## 15. What is Polymorphism?
+
+**Answer:** Polymorphism means "many forms." In Java, it allows the same method name or method call to behave differently depending on the parameters or the actual object.
+
+Two common forms are:
+
+### A. Compile-Time Polymorphism
+
+Achieved through method overloading.
+
+```java
+class Calculator {
+    int add(int a, int b) {
+        return a + b;
+    }
+
+    int add(int a, int b, int c) {
+        return a + b + c;
+    }
+}
+```
+
+### B. Runtime Polymorphism
+
+Achieved through method overriding and dynamic method dispatch.
+
+```java
+class Animal {
+    void sound() {
+        System.out.println("Animal sound");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Bark");
+    }
+}
+```
+
+```java
+Animal a = new Dog();
+a.sound();
+```
+
+**Output:**
+
+```text
+Bark
+```
+
+---
+
+## 16. What is Abstraction?
+
+**Answer:** Abstraction means exposing essential operations while hiding unnecessary implementation details.
+
+In Java, abstraction is commonly achieved through abstract classes and interfaces.
+
+**Real-life example:** When driving a car, you use the steering wheel and pedals without needing to understand every internal engine mechanism.
+
+**Java example:**
+
+```java
+abstract class Shape {
+    abstract double calculateArea();
+}
+```
+
+The abstract class declares what the operation should do, while subclasses provide the implementation.
+
+---
+
+## 17. What is an Abstract Class?
+
+**Answer:** An abstract class is a class declared with the `abstract` keyword. It cannot be instantiated directly and can contain both abstract methods and implemented methods.
+
+**Example:**
+
+```java
+abstract class Animal {
+    abstract void sound();
+
+    void sleep() {
+        System.out.println("Animal sleeps");
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Dog barks");
+    }
+}
+```
+
+**Usage:**
+
+```java
+Animal a = new Dog();
+a.sound();
+a.sleep();
+```
+
+**Key points:**
+
+* Cannot be instantiated directly.
+* Can contain abstract and concrete methods.
+* Can have constructors and instance fields.
+* A concrete subclass must implement inherited abstract methods unless it is also abstract.
+
+---
+
+## 18. What is an Interface?
+
+**Answer:** An interface defines a contract that implementing classes agree to follow. It is declared using the `interface` keyword.
+
+Interfaces can contain abstract methods, default methods, static methods, private helper methods, and constants.
+
+**Example:**
+
+```java
+interface Printable {
+    void print();
+}
+
+class Document implements Printable {
+    @Override
+    public void print() {
+        System.out.println("Printing document");
+    }
+}
+```
+
+**Usage:**
+
+```java
+Printable p = new Document();
+p.print();
+```
+
+**Output:**
+
+```text
+Printing document
+```
+
+**Key points:**
+
+* A class uses `implements` to implement an interface.
+* A class can implement multiple interfaces.
+* Interface abstract methods are implicitly `public`.
+* An implementing class must provide compatible public implementations of those methods unless the class is abstract.
+
+---
+
+## 19. Abstract Class vs Interface
+
+| Feature              | Abstract Class                                       | Interface                                        |
+| -------------------- | ---------------------------------------------------- | ------------------------------------------------ |
+| Declaration          | `abstract class`                                     | `interface`                                      |
+| Inheritance keyword  | `extends`                                            | `implements`                                     |
+| Constructors         | Allowed                                              | Not allowed                                      |
+| Instance fields      | Allowed                                              | Not allowed                                      |
+| Constants            | Allowed                                              | Allowed (`public static final` by default)       |
+| Abstract methods     | Allowed                                              | Allowed                                          |
+| Concrete methods     | Allowed                                              | Default, static, and private methods are allowed |
+| Multiple inheritance | A class can extend only one class                    | A class can implement multiple interfaces        |
+| Main purpose         | Share state and implementation among related classes | Define a contract or capability                  |
+
+### Example: Abstract Class
+
+```java
+abstract class Vehicle {
+    int speed;
+
+    abstract void start();
+
+    void stop() {
+        System.out.println("Vehicle stopped");
+    }
+}
+```
+
+### Example: Interface
+
+```java
+interface Flyable {
+    void fly();
+}
+
+class Airplane implements Flyable {
+    @Override
+    public void fly() {
+        System.out.println("Airplane is flying");
+    }
+}
+```
+
+**When to use each:**
+
+* Use an **abstract class** when related classes need shared instance state or common implementation.
+* Use an **interface** when different classes need to follow the same contract or provide the same capability.
+
+---
+
+## 🎯 Quick Revision
+
+| Concept            | One-Line Answer                                                         |
+| ------------------ | ----------------------------------------------------------------------- |
+| `final`            | Restricts reassignment, overriding, or inheritance                      |
+| `finally`          | Cleanup block associated with `try` and exception handling              |
+| `finalize()`       | Deprecated object-finalization method                                   |
+| Access modifiers   | Control accessibility                                                   |
+| Type casting       | Converts a value from one type to another                               |
+| Keywords           | Reserved words with predefined meanings                                 |
+| Comments           | Explanatory text ignored as executable code                             |
+| Package            | Groups related Java types                                               |
+| `import`           | Allows use of accessible types by simple name                           |
+| Naming conventions | Guidelines for readable names                                           |
+| OOP                | Programming organized around objects                                    |
+| Encapsulation      | Bundles data and methods and controls access                            |
+| Inheritance        | Derives a class from another class                                      |
+| Polymorphism       | Supports different implementations through a common method call or name |
+| Abstraction        | Exposes essential behavior and hides implementation details             |
+| Abstract class     | A class that cannot be instantiated directly                            |
+| Interface          | A contract that classes can implement                                   |
+
+---
+
+## 💡 Interview Practice Checklist
+
+* [ ] Explain `final`, `finally`, and `finalize()`.
+* [ ] Compare all four access levels.
+* [ ] Demonstrate widening and narrowing conversions.
+* [ ] Explain the four pillars of OOP with examples.
+* [ ] Write a program demonstrating encapsulation.
+* [ ] Demonstrate inheritance and runtime polymorphism.
+* [ ] Explain the difference between an abstract class and an interface.
+
+**☕ Keep Learning, Keep Coding, and Keep Practising! 💻**
+
+
+
 
 ## 💡 Interview Preparation Tips
 
